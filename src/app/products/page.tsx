@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { Suspense, useCallback, useState } from "react";
 
 // Komponentler
 import { ProductFilters } from "@/components/ProductFilter";
@@ -9,7 +9,7 @@ import { ProductsList } from "@/components/ProductList";
 // Tipler
 import { ProductFilters as ProductFiltersType } from "@/types/products";
 
-export default function ProductsPage() {
+function ProductsPageContent() {
   const [filters, setFilters] = useState<ProductFiltersType>({});
 
   const handleFiltersChange = useCallback((newFilters: ProductFiltersType) => {
@@ -39,5 +39,13 @@ export default function ProductsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProductsPageContent />
+    </Suspense>
   );
 }
