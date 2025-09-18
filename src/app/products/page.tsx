@@ -14,7 +14,7 @@ export default function ProductsPage() {
 
   const handleFiltersChange = useCallback((newFilters: ProductFiltersType) => {
     setFilters(newFilters);
-  }, [filters]);
+  }, []);
 
   console.log('Current Filters:', filters);
   

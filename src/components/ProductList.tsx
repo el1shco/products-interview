@@ -74,7 +74,7 @@ export function ProductsList({ filters }: ProductsListProps) {
   }, [filters]);
 
   // Scroll handleri
-  const handleScroll = useCallback(
+  const handleScroll = useCallback(() => {
     throttle(() => {
       if (
         window.innerHeight + document.documentElement.scrollTop >=
@@ -86,9 +86,8 @@ export function ProductsList({ filters }: ProductsListProps) {
           loadProducts(nextPage, false);
         }
       }
-    }, 500),
-    [hasMore, loadingMore, loading, currentPage, loadProducts]
-  );
+    }, 500)();
+  }, [hasMore, loadingMore, loading, currentPage, loadProducts]);
   
 
   // Filter deyisikliklerinde ve ilk yuklemede mehsullari yukleme
@@ -96,7 +95,7 @@ export function ProductsList({ filters }: ProductsListProps) {
     setCurrentPage(0);
     setHasMore(true);
     loadProducts(0, true);
-  }, [filters]);
+  }, [filters, loadProducts]);
 
   // Scroll listener
   useEffect(() => {
@@ -144,9 +143,6 @@ export function ProductsList({ filters }: ProductsListProps) {
       <div className="flex flex-col items-center justify-center py-12 space-y-4">
         <div className="text-center space-y-2">
           <h3 className="text-lg font-semibold">No Products Found</h3>
-          <p className="text-muted-foreground max-w-md">
-            Try adjusting your filters or search terms to find what you're looking for.
-          </p>
         </div>
       </div>
     );
@@ -194,7 +190,7 @@ export function ProductsList({ filters }: ProductsListProps) {
 
       {!hasMore && products.length > 0 && (
         <div className="text-center py-8">
-          <p className="text-muted-foreground">You've seen all the products!</p>
+          <p className="text-muted-foreground">You have seen all the products!</p>
         </div>
       )}
     </div>

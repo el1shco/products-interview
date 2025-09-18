@@ -69,7 +69,7 @@ export function ProductFilters({ onFiltersChange }: ProductFiltersProps) {
     };
 
     debouncedOnFiltersChange(activeFilters);
-  }, [filters]);
+  }, [filters, debouncedOnFiltersChange]);
 
   const handleSearchChange = (value: string) => {
     setFilters({ search: value || null });
@@ -206,7 +206,7 @@ export function ProductFilters({ onFiltersChange }: ProductFiltersProps) {
             <div className="flex flex-wrap gap-2">
               {filters.search && (
                 <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary/10 text-primary">
-                  Search: "{filters.search}"
+                  Search: {filters.search}
                 </span>
               )}
               {filters.category && (
